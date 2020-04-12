@@ -11,16 +11,16 @@ $ apt update
 $ apt upgrade
 $ apt install python
 $ apt install git
-$ git clone https://github.com/arifistifik/sb
-$ cd sb
+$ git clone https://github.com/opsaiooa/tpbot
+$ cd tpbot
 $ python sb.py
 ```
 
 ## Installation for VPS
 
 ```sh
-$ git clone https://github.com/arifistifik/sb
-$ cd sb
+$ git clone https://github.com/opsaiooa/tpbot
+$ cd tpbot
 $ python3 sb.py
 ```
 
