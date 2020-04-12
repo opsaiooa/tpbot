@@ -760,6 +760,19 @@ def clBot(op):
                             for ls in lists:
                                 path = cl.getProfileCoverURL(ls)
                                 cl.sendImageWithURL(msg.to, str(path))
+                elif msg.text.lower().startswith("cover "):
+                    if cl != None:
+                        if 'MENTION' in msg.contentMetadata.keys()!= None:
+                            names = re.findall(r'@(\w+)', text)
+                            mention = ast.literal_eval(msg.contentMetadata['MENTION'])
+                            mentionees = mention['MENTIONEES']
+                            lists = []
+                            for mention in mentionees:
+                                if mention["M"] not in lists:
+                                    lists.append(mention["M"])
+                            for ls in lists:
+                                path = cl.getProfileCoverURL(ls)
+                                cl.sendImageWithURL(msg.to, str(path))
                 elif msg.text.lower().startswith("主頁 "):
                     if cl != None:
                         if 'MENTION' in msg.contentMetadata.keys()!= None:
@@ -819,7 +832,69 @@ def clBot(op):
                         cl.sendMessage(msg.to, "restore profile ")
                     except:
                         cl.sendMessage(msg.to, "Gagal restore profile")
-
+			
+#==================================自加開始====================================================
+                elif "yt" in msg.text.lower():
+                    sep = text.split(" ")
+                    search = text.replace(sep[0] + " ","")
+                    params = {"search_query": search}
+                    with requests.session() as web:
+                        web.headers["User-Agent"] = random.choice(settings["userAgent"])
+                        r = web.get("https://www.youtube.com/results", params = params)
+                        soup = BeautifulSoup(r.content, "html5lib")
+                        ret_ = "╔══[ Youtube Result ]"
+                        datas = []
+                        for data in soup.select(".yt-lockup-title > a[title]"):
+                            if "&lists" not in data["href"]:
+                                datas.append(data)
+                        for data in datas:
+                            ret_ += "\n╠══[ {} ]".format(str(data["title"]))
+                            ret_ += "\n╠ https://www.youtube.com{}".format(str(data["href"]))
+                        ret_ += "\n╚══[ 總共 {} ]".format(len(datas))
+                        cl.sendMessage(to, str(ret_))
+                elif msg.text.lower().startswith("kick "):
+                    targets = []
+                    key = eval(msg.contentMetadata["MENTION"])
+                    key["MENTIONEES"][0]["M"]
+                    for x in key["MENTIONEES"]:
+                        targets.append(x["M"])
+                    for target in targets:
+                        try:
+                            cl.sendMessage(to,"bye bye")
+                            cl.kickoutFromGroup(msg.to,[target])
+                        except:
+                            cl.sendMessage(to,"Error")
+                elif msg.text.lower().startswith("踢 "):
+                    targets = []
+                    key = eval(msg.contentMetadata["MENTION"])
+                    key["MENTIONEES"][0]["M"]
+                    for x in key["MENTIONEES"]:
+                        targets.append(x["M"])
+                    for target in targets:
+                        try:
+                            cl.sendMessage(to,"掰掰囉")
+                            cl.kickoutFromGroup(msg.to,[target])
+                        except:
+                            cl.sendMessage(to,"Error")
+                elif text.lower() in ['byeall','.kickall','kickall','跟我打']:
+                    if msg.toType == 2:
+                        gs = cl.getGroup(msg.to)
+                        for g in gs.members:
+                            try:
+                                cl.kickoutFromGroup(msg.to,[g.mid])
+                                sleep(1)
+                            except:
+                                pass
+                elif text.lower() in ['cancel','取消邀請','清除邀請']:
+                    if msg.toType == 2:
+                        group = cl.getGroup(to)
+                        gMembMids = [contact.mid for contact in group.invitee]
+                    for _mid in gMembMids:
+                        cl.cancelGroupInvitation(msg.to,[_mid])
+                        sleep(2)
+                    cl.sendMessage(msg.to,"已取消所有邀請!")
+#==================================自加結束====================================================
+		
                 elif msg.text.lower().startswith("mimicadd "):
                     targets = []
                     key = eval(msg.contentMetadata["MENTION"])
