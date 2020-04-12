@@ -1212,7 +1212,7 @@ def clBot(op):
                                         no += 1
                                         ret_ += "\n╠ {}. @!".format(str(no))
                                     ret_ += "\n╚══[ Total {} Family]".format(str(len(dataMid)))
-                                    cl.sendMention(msg.to, ret_, dataMid)")
+                                    cl.sendMention(msg.to, ret_, dataMid)
                 elif text.lower() == 'tag':
                             if msg.toType == 0:
                                 sendMention(to, to, "", "")
@@ -1229,7 +1229,7 @@ def clBot(op):
                                         no += 1
                                         ret_ += "\n╠ {}. @!".format(str(no))
                                     ret_ += "\n╚══[ Total {} Family]".format(str(len(dataMid)))
-                                    cl.sendMention(msg.to, ret_, dataMid)")
+                                    cl.sendMention(msg.to, ret_, dataMid)
                 elif text.lower() in ['群標','點名','早點名','晚點名','tagall','mentiomall','mentiom all','tag all']:
                             if msg.toType == 0:
                                 sendMention(to, to, "", "")
