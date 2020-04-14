@@ -852,47 +852,46 @@ def clBot(op):
                             ret_ += "\n╠ https://www.youtube.com{}".format(str(data["href"]))
                         ret_ += "\n╚══[ 總共 {} ]".format(len(datas))
                         cl.sendMessage(to, str(ret_))
-                elif msg.text.lower().startswith("kick "):
-                    targets = []
-                    key = eval(msg.contentMetadata["MENTION"])
-                    key["MENTIONEES"][0]["M"]
-                    for x in key["MENTIONEES"]:
-                        targets.append(x["M"])
-                    for target in targets:
+            elif "Kick @" in msg.text:
+                if 'MENTION' in msg.contentMetadata.keys() != None:
+                    names = re.findall(r'@(\w+)', msg.text)
+                    mention = ast.literal_eval(msg.contentMetadata['MENTION'])
+                    mentionees = mention['MENTIONEES']
+                    for mention in mentionees:
                         try:
-                            cl.sendMessage(to,"bye bye")
-                            cl.kickoutFromGroup(msg.to,[target])
+                            cl.kickoutFromGroup(msg.to, [mention['M']])							
                         except:
-                            cl.sendMessage(to,"Error")
-                elif msg.text.lower().startswith("踢 "):
-                    targets = []
-                    key = eval(msg.contentMetadata["MENTION"])
-                    key["MENTIONEES"][0]["M"]
-                    for x in key["MENTIONEES"]:
-                        targets.append(x["M"])
-                    for target in targets:
+                            cl.sendMessage(msg.to, "ㄜ....")
+            elif "踢 @" in msg.text:
+                if 'MENTION' in msg.contentMetadata.keys() != None:
+                    names = re.findall(r'@(\w+)', msg.text)
+                    mention = ast.literal_eval(msg.contentMetadata['MENTION'])
+                    mentionees = mention['MENTIONEES']
+                    for mention in mentionees:
                         try:
-                            cl.sendMessage(to,"掰掰囉")
-                            cl.kickoutFromGroup(msg.to,[target])
+                            cl.kickoutFromGroup(msg.to, [mention['M']])							
                         except:
-                            cl.sendMessage(to,"Error")
-                elif text.lower() in ['byeall','.kickall','kickall','跟我打']:
-                    if msg.toType == 2:
-                        gs = cl.getGroup(msg.to)
-                        for g in gs.members:
-                            try:
-                                cl.kickoutFromGroup(msg.to,[g.mid])
-                                sleep(1)
-                            except:
-                                pass
+                            cl.sendMessage(msg.to, "ㄜ....")
+                elif text.lower() in ['byeall','.kickall','kickall','跟我打','解散群組']:
+                if msg.toType == 2:
+                    group = cl.getGroup(msg.to)
+                    nama = [contact.mid for contact in group.members]
+                    for x in nama:
+                            if x not in org["Friend"]:
+                                try:
+                                    cl.kickoutFromGroup(msg.to,[x])
+                                except:
+                                    print ("結束...")
                 elif text.lower() in ['cancel','取消邀請','清除邀請']:
-                    if msg.toType == 2:
-                        group = cl.getGroup(to)
-                        gMembMids = [contact.mid for contact in group.invitee]
-                    for _mid in gMembMids:
-                        cl.cancelGroupInvitation(msg.to,[_mid])
-                        sleep(2)
-                    cl.sendMessage(msg.to,"已取消所有邀請!")
+                group = cl.getGroup(msg.to)
+                if group.invitee is None:
+                    cl.sendMessage(op.message.to, "⟦待邀區沒有人⟧")
+                else:
+                    nama = [contact.mid for contact in group.invitee]
+                    for x in nama:
+                        time.sleep(0.2)
+                        cl.cancelGroupInvitation(msg.to, [x])
+                    cl.sendMessage(msg.to, "⟦已成功清除待邀區人員⟧")
 #==================================自加結束====================================================
 		
                 elif msg.text.lower().startswith("mimicadd "):
