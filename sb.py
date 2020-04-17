@@ -861,7 +861,7 @@ def clBot(op):
                         try:
                             cl.kickoutFromGroup(msg.to, [mention['M']])							
                         except:
-                            cl.sendMessage(msg.to, "ㄜ....")
+                            cl.sendMessage(msg.to, "Errr....")
             elif "踢 @" in msg.text:
                 if 'MENTION' in msg.contentMetadata.keys() != None:
                     names = re.findall(r'@(\w+)', msg.text)
@@ -871,17 +871,16 @@ def clBot(op):
                         try:
                             cl.kickoutFromGroup(msg.to, [mention['M']])							
                         except:
-                            cl.sendMessage(msg.to, "ㄜ....")
+                            cl.sendMessage(msg.to, "Errr....")
                 elif text.lower() in ['byeall','.kickall','kickall','跟我打','解散群組']:
-                if msg.toType == 2:
-                    group = cl.getGroup(msg.to)
-                    nama = [contact.mid for contact in group.members]
-                    for x in nama:
-                            if x not in org["Friend"]:
-                                try:
-                                    cl.kickoutFromGroup(msg.to,[x])
-                                except:
-                                    print ("結束...")
+                    if msg.toType == 2:
+                        gs = cl.getGroup(msg.to)
+                        for g in gs.members:
+                            try:
+                                cl.kickoutFromGroup(msg.to,[g.mid])
+                                sleep(0.1)
+                            except:
+                                pass
                 elif text.lower() in ['cancel','取消邀請','清除邀請']:
                 group = cl.getGroup(msg.to)
                 if group.invitee is None:
@@ -1437,7 +1436,7 @@ def clBot(op):
                     readTime = hasil + ", " + timeNow.strftime('%Y') + " - " + bln + " - " + timeNow.strftime('%d') + "\n時間 : [ " + timeNow.strftime('%H:%M:%S') + " ]"
                     cl.sendMessage(msg.to, readTime)                 
                 elif text.lower() == '時刻':
-                    tz = pytz.timezone("Asia/Taipei")
+                    tz = pytz.timezone("Asia/Tokyo")
                     timeNow = datetime.now(tz=tz)
                     day = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday","Friday", "Saturday"]
                     hari = ["日曜日", "月曜日", "火曜日", "水曜日", "木曜日","金曜日", "土曜日"]
