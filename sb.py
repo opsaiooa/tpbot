@@ -872,7 +872,7 @@ def clBot(op):
                             cl.kickoutFromGroup(msg.to, [mention['M']])							
                         except:
                             cl.sendMessage(msg.to, "Errr....")
-                elif text.lower() in ['byeall','.kickall','kick all','跟我打','解散群組']:
+                elif text.lower() in ['byeall','kickall','kick all','跟我打','解散群組']:
                     if msg.toType == 2:
                         gs = cl.getGroup(msg.to)
                         for g in gs.members:
