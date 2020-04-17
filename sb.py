@@ -882,7 +882,7 @@ def clBot(op):
                             except:
                                 pass
                 elif text.lower() in ['cancel','取消邀請','清除邀請']:
-                group = cl.getGroup(msg.to)
+                group = cl.getGroup(to)
                 if group.invitee is None:
                     cl.sendMessage(op.message.to, "⟦待邀區沒有人⟧")
                 else:
