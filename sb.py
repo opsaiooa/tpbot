@@ -425,7 +425,7 @@ def clBot(op):
                 elif text.lower() == '自動離群 開':
                     settings["autoLeave"] = True
                     cl.sendMessage(to, "自動離群功能啟動✅")
-                elif text.lower() == 'autojoin off':
+                elif text.lower() == 'autoLeave off':
                     settings["autoLeave"] = False
                     cl.sendMessage(to, "menonaktifkan Auto Leave")
                 elif text.lower() == '自動離群 關':
