@@ -887,8 +887,10 @@ def clBot(op):
                     if group.invitee is None:
                         cl.sendMessage(to, "⟦待邀區沒有人⟧")
                     else:
-                        gInviMids = [contact.mid for contact in group.invitee]
-                        cl.cancelGroupInvitation(to, gInviMids)
+                        nama = [contact.mid for contact in group.invitee]
+                    for x in nama:
+                        time.sleep(0.2)
+                        cl.cancelGroupInvitation(msg.to, [x])
                     cl.sendMessage(msg.to, "⟦已成功清除待邀區人員⟧")
 #==================================自加結束====================================================
 		
