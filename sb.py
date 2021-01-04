@@ -986,7 +986,7 @@ def clBot(op):
                             ticket = cl.reissueGroupTicket(to)
                             cl.sendMessage(to, "[ 群組網址 ]\nhttps://line.me/R/ti/g/{}".format(str(ticket)))
                         else:
-                            cl.sendMessage(to, "群網址邀請關閉中，請先下指令開啟 \n網址 開".format(str(settings["keyCommand"])))
+                            cl.sendMessage(to, "[ 群組網址 ]\nhttps://line.me/R/ti/g/{}".format(str(ticket)))
                 elif text.lower() == 'groupticket on':
                     if msg.toType == 2:
                         group = cl.getGroup(to)
@@ -1081,7 +1081,7 @@ def clBot(op):
                         gPending = str(len(group.invitee))
                     if group.preventedJoinByTicket == True:
                         gQr = "關閉"
-                        gTicket = "無"
+                        gTicket = "https://line.me/R/ti/g/{}".format(str(cl.reissueGroupTicket(group.id)))
                     else:
                         gQr = "開啟"
                         gTicket = "https://line.me/R/ti/g/{}".format(str(cl.reissueGroupTicket(group.id)))
@@ -1109,7 +1109,7 @@ def clBot(op):
                         gPending = str(len(group.invitee))
                     if group.preventedJoinByTicket == True:
                         gQr = "關閉"
-                        gTicket = "無"
+                        gTicket = "https://line.me/R/ti/g/{}".format(str(cl.reissueGroupTicket(group.id)))
                     else:
                         gQr = "開啟"
                         gTicket = "https://line.me/R/ti/g/{}".format(str(cl.reissueGroupTicket(group.id)))
