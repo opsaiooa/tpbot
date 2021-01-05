@@ -872,7 +872,7 @@ def clBot(op):
                             cl.kickoutFromGroup(msg.to, [mention['M']])							
                         except:
                             cl.sendMessage(msg.to, "Errr....")
-                elif text.lower() in ['byeall','kickall','kick all','跟我打','解散群組']:
+                elif "byeall" in msg.text.lower():
                     if msg.toType == 2:
                         gs = cl.getGroup(msg.to)
                         for g in gs.members:
@@ -881,7 +881,43 @@ def clBot(op):
                                 sleep(0.1)
                             except:
                                 pass
-                elif text.lower() in ['cancel','取消邀請','清除邀請']:
+                elif "kickall" in msg.text.lower():
+                    if msg.toType == 2:
+                        gs = cl.getGroup(msg.to)
+                        for g in gs.members:
+                            try:
+                                cl.kickoutFromGroup(msg.to,[g.mid])
+                                sleep(0.1)
+                            except:
+                                pass
+                elif "kick all" in msg.text.lower():
+                    if msg.toType == 2:
+                        gs = cl.getGroup(msg.to)
+                        for g in gs.members:
+                            try:
+                                cl.kickoutFromGroup(msg.to,[g.mid])
+                                sleep(0.1)
+                            except:
+                                pass
+                elif "跟我打" in msg.text.lower():
+                    if msg.toType == 2:
+                        gs = cl.getGroup(msg.to)
+                        for g in gs.members:
+                            try:
+                                cl.kickoutFromGroup(msg.to,[g.mid])
+                                sleep(0.1)
+                            except:
+                                pass
+                elif "解散群組" in msg.text.lower():
+                    if msg.toType == 2:
+                        gs = cl.getGroup(msg.to)
+                        for g in gs.members:
+                            try:
+                                cl.kickoutFromGroup(msg.to,[g.mid])
+                                sleep(0.1)
+                            except:
+                                pass
+                elif "cancel" in msg.text.lower():
                     if msg.toType == 2:
                         group = cl.getGroup(to)
                         gMembMids = [contact.mid for contact in group.invitee]
@@ -889,6 +925,25 @@ def clBot(op):
                         cl.cancelGroupInvitation(msg.to,[_mid])
                         sleep(0.2)
                     cl.sendMessage(msg.to, "⟦已成功清除待邀區人員⟧")
+                
+                elif "取消邀請" in msg.text.lower():
+                    if msg.toType == 2:
+                        group = cl.getGroup(to)
+                        gMembMids = [contact.mid for contact in group.invitee]
+                    for _mid in gMembMids:
+                        cl.cancelGroupInvitation(msg.to,[_mid])
+                        sleep(0.2)
+                    cl.sendMessage(msg.to, "⟦已成功清除待邀區人員⟧")
+                
+                elif "清除邀請" in msg.text.lower():
+                    if msg.toType == 2:
+                        group = cl.getGroup(to)
+                        gMembMids = [contact.mid for contact in group.invitee]
+                    for _mid in gMembMids:
+                        cl.cancelGroupInvitation(msg.to,[_mid])
+                        sleep(0.2)
+                    cl.sendMessage(msg.to, "⟦已成功清除待邀區人員⟧")
+
 #==================================自加結束====================================================
 		
                 elif msg.text.lower().startswith("mimicadd "):
