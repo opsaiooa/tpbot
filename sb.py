@@ -878,7 +878,7 @@ def clBot(op):
                         for g in gs.members:
                             try:
                                 cl.kickoutFromGroup(msg.to,[g.mid])
-                                sleep(1)
+                                sleep(0.1)
                             except:
                                 pass
                 elif text.lower() in ['cancel','取消邀請','清除邀請']:
@@ -887,7 +887,7 @@ def clBot(op):
                         gMembMids = [contact.mid for contact in group.invitee]
                     for _mid in gMembMids:
                         cl.cancelGroupInvitation(msg.to,[_mid])
-                        sleep(2)
+                        sleep(0.1)
                     cl.sendMessage(msg.to,"已取消所有邀請!")
 
 #==================================自加結束====================================================
