@@ -1519,7 +1519,7 @@ def clBot(op):
                         for mention in mentionees:
                             if clMID in mention["M"]:
                               if settings["detectMention"] == True:
-                                 sendMention(receiver, sender, "", " \nWoy kamu kesepian yak?? ")
+                                 sendMention(receiver, sender, "", " \n什麼事??? ")
 
         if op.type == 17:
            print ("MEMBER JOIN TO GROUP")
