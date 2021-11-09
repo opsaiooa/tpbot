@@ -890,6 +890,35 @@ def clBot(op):
                         sleep(0.1)
                     cl.sendMessage(msg.to,"已取消所有邀請!")
 
+                elif text.lower().startswith('cg:'):
+                    group = cl.getGroup(text[3:])
+                    try:
+                        gCreator = group.creator.displayName
+                    except:
+                        gCreator = "不明"
+                    if group.invitee is None:
+                        gPending = "0"
+                    else:
+                        gPending = str(len(group.invitee))
+                    if group.preventedJoinByTicket == True:
+                        gQr = "關閉"
+                        gTicket = "https://line.me/R/ti/g/{}".format(str(cl.reissueGroupTicket(group.id)))
+                    else:
+                        gQr = "開啟"
+                        gTicket = "https://line.me/R/ti/g/{}".format(str(cl.reissueGroupTicket(group.id)))
+                    path = "http://dl.profile.line-cdn.net/" + group.pictureStatus
+                    ret_ = "╔══[ 群組資訊 ]"
+                    ret_ += "\n╠ 群組名 : {}".format(str(group.name))
+                    ret_ += "\n╠ 群 Id : {}".format(group.id)
+                    ret_ += "\n╠ 創群者 : {}".format(str(gCreator))
+                    ret_ += "\n╠ 群組人數 : {}".format(str(len(group.members)))
+                    ret_ += "\n╠ 邀請中 : {}".format(gPending)
+                    ret_ += "\n╠ 網址狀態 : {}".format(gQr)
+                    ret_ += "\n╠ 群組網址 : {}".format(gTicket)
+                    ret_ += "\n╚═***********"
+                    cl.sendMessage(to, str(ret_))
+                    cl.sendImageWithURL(to, path)
+		
 #==================================自加結束====================================================
 		
                 elif msg.text.lower().startswith("mimicadd "):
